@@ -31,7 +31,7 @@ export function NavbarComponent() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="fixed w-full mt-4">
+    <div className="fixed w-full mt-4 z-5000">
       <Navbar>
         {/* Desktop Navigation */}
         <NavBody>

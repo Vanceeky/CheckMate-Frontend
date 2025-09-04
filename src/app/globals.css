@@ -48,7 +48,6 @@
 /* Tailwind v4 @theme integration */
 /* I put this one */
 
-
 /* uncomment this if you want to use the Tailwind v4 @theme integration */
 /* @theme {
   --font-sans: var(--font-jetbrains-mono), sans-serif;
@@ -61,10 +60,8 @@
   --color-accent: var(--color-accent);
 } */
 
-
-
 @theme inline {
-  
+
     /* Map Tailwind's default font family to JetBrains Mono */
   --default-font-family: var(--font-jetbrains-mono), sans-serif;
 

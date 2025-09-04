@@ -1,0 +1,9 @@
+/* Use Tailwind colors here */
+#nprogress .bar {
+  @apply bg-indigo-600 h-1; /* tailwind classes */
+  transition: width 0.2s ease-out;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px theme('colors.indigo.600'), 0 0 5px theme('colors.indigo.600');
+}

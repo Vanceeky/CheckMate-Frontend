@@ -34,7 +34,7 @@ const Hero = () => {
                   alt="Google Vision API Logo"
                   className="h-6 w-6 object-contain"
                 />
-                Google Vision API
+                Cloud Vision API
               </button>
             </div>
           </div>
