@@ -17,7 +17,7 @@ const statusColors: Record<status, string> = {
 
 export function StatusBadge({ status }: { status: status }) {
   return (
-    <Badge className={`${statusColors[status]} lowercase text-xs`}>
+    <Badge className={`${statusColors[status]} capitalize text-xs`}>
       {status}
     </Badge>
   );

@@ -11,3 +11,12 @@ export interface InstituteProps {
     address?: string,
     description?: string
 }
+
+export interface CreateInstituteProps {
+    institutionName: string,
+    email: string,
+    type: 'university' | 'school' | 'academy' | 'college',
+    contactNumber: string,
+    address?: string,
+    description?: string
+}

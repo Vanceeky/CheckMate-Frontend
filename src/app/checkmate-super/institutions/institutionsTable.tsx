@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableHead, TableHeader, TableRow, TableFooter, TableCell } from "@/components/ui/table"
 import { Button } from '@/components/ui/button'
+import { AvatarFall } from '@/helpers/AvatarFallback';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
 import {
   DropdownMenu,
@@ -14,66 +16,36 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-import { Search, Filter, MoreHorizontal } from 'lucide-react'
+import { Search, Filter, MoreHorizontal, ArrowLeft, ArrowRight } from 'lucide-react'
 
 import { InstituteTypeBadge, StatusBadge } from '@/helpers/BadgeTypes'
 
+import { Separator } from '@/components/ui/separator'
 
 // src/data/institutes.ts
-import { InstituteProps } from "@/types/institute";
 
-export const institutes: InstituteProps[] = [
-  {
-    id: "1",
-    institutionName: "National University",
-    email: "nu@example.com",
-    type: "university",
-    contactNumber: "0987654321",
-    students: 12000,
-    teachers: 500,
-    status: "active",
-  },
-  {
-      id: "2",
-      institutionName: "Greenfield College",
-      email: 'greenfield@example.com',
-      type: "college",
-      contactNumber: "0987654321",
-      students: 3500,
-      teachers: 120,
-      status: "active",
-  },
-  {
-    id: "3",
-    institutionName: "Riverdale High School",
-    email: "riverdale@example.com",
-    type: "school",
-    contactNumber: "0987654321",
-    students: 850,
-    teachers: 45,
-    status: "inactive",
-  },
-  {
-    id: "4",
-    institutionName: "Bright Minds Academy",
-    email: "brightminds@example.com",
-    type: "academy",
-    contactNumber: "0987654321",
-    students: 600,
-    teachers: 30,
-    status: "active",
-  },
-];
+import AddInstitution from './AddInstitution'
+
+import { institutes } from '@/data/institutes'
+import Link from 'next/link'
 
 const institutionsTable = () => {
   return (
     <Card className='mt-4 p-5'>
 
 
-        <div className=''>
+        <div className='flex flex-col sm:flex-row justify-between'>
+            <div className='mb-2'>
+
             <CardTitle className='mb-2'>All Institutions ({"12"})</CardTitle>
             <CardDescription>List of all educational institutions registered in the system</CardDescription>
+            </div>
+
+                
+            <AddInstitution/>
+
         </div>
+
 
 
         <div className="flex flex-col sm:flex-row gap-3 max-w-5xl">
@@ -138,8 +110,37 @@ const institutionsTable = () => {
 
             <TableBody>
                 {institutes.map((inst) => (
-                <TableRow>
-                    <TableCell className="font-medium">{inst.institutionName}</TableCell>
+                <TableRow key={inst.id}>
+                    <TableCell className="font-medium">
+             
+             
+                          
+                        <div className="flex items-center gap-3">
+                            <AvatarFall
+                            src=""
+                            alt={inst.institutionName}
+                            institutionName={inst.institutionName}
+                            />
+                            <div className="flex flex-col">
+
+           
+                                <Link href={`/checkmate-super/institutions/${inst.id}`} target='_blank'>
+                                    <span className='hover:text-primary'>{inst.institutionName}</span>
+                                </Link>
+                 
+
+                            {inst.email && (
+                                <span className="text-xs text-muted-foreground">{inst.email}</span>
+                            )}
+                            </div>
+                        </div>
+
+
+
+                  
+
+                    </TableCell>
+
                     <TableCell>  <InstituteTypeBadge type={inst.type} /></TableCell>
                     <TableCell className='text-center'>{inst.contactNumber}</TableCell>
                     <TableCell className='text-center'>{inst.students}</TableCell>
@@ -171,13 +172,33 @@ const institutionsTable = () => {
 
                                
             </TableBody>
+
         </Table>
 
   
-      
+      <Separator />
 
         <CardFooter>
+            <div className="flex-1 text-sm text-muted-foreground">
+                Showing <span className="font-medium">1 to 10</span> of{' '}
+                <span className="font-medium">100</span> results.
+            </div>
 
+            <div className="flex items-center space-x-2">
+                <Button
+                variant="default"
+                size="sm"
+                className="hidden sm:flex"
+                >
+                <ArrowLeft className="mr-2 h-4 w-4" /> Prev
+                </Button>
+                <Button
+                size="sm"
+                className="hidden sm:flex"
+                >
+                Next <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+            </div>
         </CardFooter>
     </Card>
   )

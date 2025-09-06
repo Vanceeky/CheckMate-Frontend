@@ -35,6 +35,12 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
+
+
+
+
+const BASE_PATH = "/checkmate-super"
+
 const data = {
   user: {
     name: "shadcn",
@@ -44,12 +50,12 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "dashboard",
+      url: `${BASE_PATH}/`,
       icon: IconDashboard,
     },
     {
       title: "Institutions",
-      url: "institutions",
+      url: `${BASE_PATH}/institutions`,
       icon: IconBuildings,
     },
     {

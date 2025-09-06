@@ -12,13 +12,13 @@ import {
 
 type StatCardProps = {
   title: string
-  value: string
+  value: number | string
   trendValue: string
   footerMain: string
   Icon: React.ElementType
 }
 
-function StatCard({
+export function StatCard({
   title,
   value,
   trendValue,

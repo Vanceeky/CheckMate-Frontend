@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, JetBrains_Mono  } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import { TopLoader } from "@/components/TopLoader";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,8 +36,9 @@ export default function RootLayout({
         <ThemeProvider>
           
           {children}
+          
+            <Toaster position="top-center" />
 
-          <TopLoader /> {/* client-side progress bar */}
         </ThemeProvider>
       </body>
     </html>
