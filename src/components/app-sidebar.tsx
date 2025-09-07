@@ -17,6 +17,8 @@ import {
   IconSearch,
   IconSettings,
   IconUsers,
+  IconUser,
+  IconChalkboard
 } from "@tabler/icons-react"
 
 import { Building } from "lucide-react";
@@ -39,122 +41,78 @@ import {
 
 
 
-const BASE_PATH = "/checkmate-super"
+// nav-config.ts
+const BASE_PATHS = {
+  superadmin: "/checkmate-super",
+  institutionAdmin: "/checkmate-institution",
+  teacher: "/checkmate-teacher",
+  student: "/checkmate-student",
+} as const
 
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+// Define navs per role
+export const NAV_CONFIG: Record<string, any> = {
+  superadmin: {
+    navMain: [
+      { title: "Dashboard", url: `${BASE_PATHS.superadmin}/`, icon: IconDashboard },
+      { title: "Institutions", url: `${BASE_PATHS.superadmin}/institutions`, icon: IconBuildings },
+      { title: "Analytics", url: `${BASE_PATHS.superadmin}/analytics`, icon: IconChartBar },
+      { title: "Projects", url: `${BASE_PATHS.superadmin}/projects`, icon: IconFolder },
+    ],
+    navSecondary: [
+      { title: "Settings", url: `${BASE_PATHS.superadmin}/settings`, icon: IconSettings },
+      { title: "Get Help", url: "#", icon: IconHelp },
+    ],
+    documents: [
+      { name: "Documents", url: `${BASE_PATHS.superadmin}/documents`, icon: IconFileDescription },
+    ],
   },
-  navMain: [
-    {
-      title: "Dashboard",
-      url: `${BASE_PATH}/`,
-      icon: IconDashboard,
-    },
-    {
-      title: "Institutions",
-      url: `${BASE_PATH}/institutions`,
-      icon: IconBuildings,
-    },
-    {
-      title: "Analytics",
-      url: "#",
-      icon: IconChartBar,
-    },
-    {
-      title: "Projects",
-      url: "#",
-      icon: IconFolder,
-    },
 
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: IconCamera,
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Proposal",
-      icon: IconFileDescription,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      icon: IconFileAi,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: "Settings",
-      url: "#",
-      icon: IconSettings,
-    },
-    {
-      title: "Get Help",
-      url: "#",
-      icon: IconHelp,
-    },
-    {
-      title: "Search",
-      url: "#",
-      icon: IconSearch,
-    },
-  ],
-  documents: [
-    {
-      name: "Data Library",
-      url: "#",
-      icon: IconDatabase,
-    },
-    {
-      name: "Reports",
-      url: "#",
-      icon: IconReport,
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      icon: IconFileWord,
-    },
-  ],
+  institutionAdmin: {
+    navMain: [
+      { title: "Dashboard", url: `${BASE_PATHS.institutionAdmin}/`, icon: IconDashboard },
+      { title: "Manage Institution", url: `${BASE_PATHS.institutionAdmin}/manage`, icon: IconBuildings },
+      { title: "Faculty", url: `${BASE_PATHS.institutionAdmin}/faculty`, icon: IconUser },
+      { title: "Students", url: `${BASE_PATHS.institutionAdmin}/students`, icon: IconUsers },
+    ],
+    navSecondary: [
+      { title: "Settings", url: `${BASE_PATHS.institutionAdmin}/settings`, icon: IconSettings },
+    ],
+  },
+
+  teacher: {
+    navMain: [
+      { title: "Dashboard", url: `${BASE_PATHS.teacher}/`, icon: IconDashboard },
+      { title: "Classes", url: `${BASE_PATHS.teacher}/classes`, icon: IconChalkboard },
+      { title: "Exams", url: `${BASE_PATHS.teacher}/exams`, icon: IconFileDescription },
+      { title: "Grades", url: `${BASE_PATHS.teacher}/grades`, icon: IconChartBar },
+    ],
+    navSecondary: [
+      { title: "Settings", url: `${BASE_PATHS.teacher}/settings`, icon: IconSettings },
+    ],
+  },
+
+  student: {
+    navMain: [
+      { title: "Dashboard", url: `${BASE_PATHS.student}/`, icon: IconDashboard },
+      { title: "My Exams", url: `${BASE_PATHS.student}/exams`, icon: IconFileDescription },
+      { title: "Results", url: `${BASE_PATHS.student}/results`, icon: IconChartBar },
+    ],
+    navSecondary: [
+      { title: "Profile", url: `${BASE_PATHS.student}/profile`, icon: IconUser },
+      { title: "Settings", url: `${BASE_PATHS.student}/settings`, icon: IconSettings },
+    ],
+  },
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
+type Role = "superadmin" | "institutionAdmin" | "teacher" | "student"
+
+export function AppSidebar({
+  role = "institutionAdmin", // temporary default, later from auth/cookie
+  ...props
+}: { role?: Role } & React.ComponentProps<typeof Sidebar>) {
+  const nav = NAV_CONFIG[role] // pick correct navs
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -166,19 +124,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
               <a href="#">
                 <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
+                <span className="text-base font-semibold">Checkmate</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavMain items={nav.navMain} />
+        {nav.documents && <NavDocuments items={nav.documents} />}
+        <NavSecondary items={nav.navSecondary} className="mt-auto" />
       </SidebarContent>
+
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={{ name: "shadcn", email: "m@example.com", avatar: "/avatars/shadcn.jpg" }} />
       </SidebarFooter>
     </Sidebar>
   )

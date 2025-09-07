@@ -63,11 +63,11 @@
 @theme inline {
 
     /* Map Tailwind's default font family to JetBrains Mono */
-  --default-font-family: var(--font-jetbrains-mono), sans-serif;
-
+  /* --default-font-family: var(--font-jetbrains-mono), sans-serif;
+ */
   /* Optional: also map Tailwind font tokens */
-  --font-sans: var(--font-jetbrains-mono), sans-serif;
-  --font-mono: var(--font-jetbrains-mono), monospace;
+/*   --font-sans: var(--font-jetbrains-mono), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace; */
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
