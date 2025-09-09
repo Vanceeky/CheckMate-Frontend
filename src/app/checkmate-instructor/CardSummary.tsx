@@ -10,7 +10,7 @@ interface CardSummaryProps {
 
 const CardSummary = ({ title, value, icon: Icon, color = "text-blue-500" }: CardSummaryProps) => {
   return (
-    <Card className="h-auto">
+    <Card className="h-auto p-2 bg-transparent">
       <CardContent className="">
         <div className="flex items-center justify-between">
           <div>

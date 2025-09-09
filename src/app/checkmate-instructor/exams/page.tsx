@@ -12,22 +12,30 @@ import SummaryBreakdown from '../SummaryBreakdown'
 import AnswersCard from './AnswersCard'
 
 import dummyAnswerKeys from '@/data/answerKeys'
+import CreateExam from '@/components/ExamAnswerKeys/CreateExam';
 
 const Exams = () => {
   return (
     <div className="p-4 lg:p-6 grid grid-cols-12 gap-4">
         <div className="col-span-12 lg:col-span-9">
-            <div className="p-4">
+            <div className="p-4 flex items-center justify-between">
                 {/* Institution name */}
-                <span className="text-2xl font-semibold text-foreground">
-                Exam Answer Keys
-                </span>
+                <div>
+                    <span className="text-2xl font-semibold text-foreground">
+                    Exam Answer Keys
+                    </span>
 
-                {/* Address */}
-                <div className="mt-1 flex items-center text-sm text-muted-foreground">
-                <Edit className="mr-2 h-4 w-4 mt-0.5" />
-                <p className='text-lg'>Create and manage answer keys for your exams</p>
+                    {/* Address */}
+                    <div className="mt-1 flex items-center text-sm text-muted-foreground">
+                    <Edit className="mr-2 h-4 w-4 mt-0.5" />
+                    <p className='text-lg'>Create and manage answer keys for your exams</p>
+                    </div>
                 </div>
+
+                <div>
+                    <CreateExam/>
+                </div>
+
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -96,8 +104,8 @@ const Exams = () => {
 
 
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-4">
-                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch mt-4">
+
                 {dummyAnswerKeys.map((key) => (
                     <AnswersCard
                     key={key.id}
@@ -109,10 +117,6 @@ const Exams = () => {
                 ))}
 
             </div>
-
-
-
-
 
 
         </div>
