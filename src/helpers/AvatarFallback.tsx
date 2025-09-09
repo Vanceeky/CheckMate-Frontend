@@ -9,7 +9,7 @@ interface AvatarFallProps {
 export function AvatarFall({ src, alt, institutionName }: AvatarFallProps) {
   const initials = institutionName
     ? institutionName.slice(0, 2).toUpperCase()
-    : "CN";
+    : "CM";
 
   return (
     <Avatar>

@@ -47,6 +47,7 @@ const BASE_PATHS = {
   institutionAdmin: "/checkmate-institution",
   teacher: "/checkmate-teacher",
   student: "/checkmate-student",
+  instructor: "/checkmate-instructor",
 } as const
 
 // Define navs per role
@@ -79,6 +80,19 @@ export const NAV_CONFIG: Record<string, any> = {
     ],
   },
 
+  instructor: {
+    navMain: [
+      { title: "Dashboard", url: `${BASE_PATHS.instructor}/`, icon: IconDashboard },
+      { title: "Classes", url: `${BASE_PATHS.instructor}/classes`, icon: IconChalkboard },
+      { title: "Exams", url: `${BASE_PATHS.instructor}/exams`, icon: IconFileDescription },
+      { title: "Grades", url: `${BASE_PATHS.instructor}/grades`, icon: IconChartBar },
+    ],
+    navSecondary: [
+      { title: "Settings", url: `${BASE_PATHS.instructor}/settings`, icon: IconSettings },
+    ],
+  },
+
+
   teacher: {
     navMain: [
       { title: "Dashboard", url: `${BASE_PATHS.teacher}/`, icon: IconDashboard },
@@ -102,13 +116,17 @@ export const NAV_CONFIG: Record<string, any> = {
       { title: "Settings", url: `${BASE_PATHS.student}/settings`, icon: IconSettings },
     ],
   },
+
+
+
+
 }
 
 
-type Role = "superadmin" | "institutionAdmin" | "teacher" | "student"
+type Role = "superadmin" | "institutionAdmin" | "teacher" | "student" | "instructor"
 
 export function AppSidebar({
-  role = "institutionAdmin", // temporary default, later from auth/cookie
+  role = "instructor", // temporary default, later from auth/cookie
   ...props
 }: { role?: Role } & React.ComponentProps<typeof Sidebar>) {
   const nav = NAV_CONFIG[role] // pick correct navs
