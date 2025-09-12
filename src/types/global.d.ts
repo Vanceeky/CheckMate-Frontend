@@ -1,2 +1,2 @@
 // global.d.ts
-declare var cv: any;
+declare const cv: any;
