@@ -3,6 +3,7 @@
 
 "use client";
 import React from "react"
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardHeader,
@@ -30,20 +31,7 @@ const examPartIcons: Record<string, React.ElementType> = {
   Essay: FileText,
 }
 
-interface AnswerKey {
-  id: number
-  title: string
-  course: string
-  status: string
-  semester: string
-  term: string
-  parts: { id: string; type: string; questions: any[] }[]
-  questionsCount: number
-  totalPoints: number
-  createdDate: string
-  lastModified: string
-}
-
+import { AnswerKey } from "@/types/AnswerKey"
 
 import { statusColors, termColors } from "@/helpers/badgeColors";
 
@@ -56,16 +44,18 @@ interface AnswersCardProps {
 }
 
 const AnswersCard = ({ answerKey, onView, onDuplicate, onEdit }: AnswersCardProps) => {
+  const router = useRouter();
+
   return (
     <Card className="hover:shadow-md transition-shadow cursor-pointer group">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <CardTitle className="text-lg line-clamp-2 group-hover:text-primary transition-colors">
-              {answerKey.title}
+              {answerKey.subject}
             </CardTitle>
             <p className="text-sm text-muted-foreground mt-1">
-              {answerKey.course}
+              {answerKey.schoolYear}
             </p>
           </div>
         <Badge className={statusColors[answerKey.status] || "bg-gray-400 text-white"}>
@@ -77,10 +67,10 @@ const AnswersCard = ({ answerKey, onView, onDuplicate, onEdit }: AnswersCardProp
       <CardContent className="space-y-4">
         <div className="flex items-center gap-2">
         <Badge
-        className={termColors[answerKey.term] || "bg-gray-300 text-black"}
+        className={termColors[answerKey.examType] || "bg-gray-300 text-black"}
         variant="secondary"
         >
-        {answerKey.term}
+        {answerKey.examType}
         </Badge>
           <span className="text-sm text-muted-foreground">
             {answerKey.semester}
@@ -118,11 +108,24 @@ const AnswersCard = ({ answerKey, onView, onDuplicate, onEdit }: AnswersCardProp
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
               <Hash className="w-4 h-4 text-muted-foreground" />
-              <span>{answerKey.questionsCount} questions</span>
+              <span>
+                {answerKey.parts.reduce(
+                  (total, part) => total + part.questions.length,
+                  0
+                )}{" "}
+                questions
+              </span>
             </div>
             <div className="flex items-center gap-1">
               <Users className="w-4 h-4 text-muted-foreground" />
-              <span>{answerKey.totalPoints} points</span>
+              <span>
+                {answerKey.parts.reduce(
+                  (total, part) =>
+                    total + part.questions.reduce((sum, q) => sum + q.points, 0),
+                  0
+                )}{" "}
+                points
+              </span>
             </div>
           </div>
         </div>
@@ -139,15 +142,20 @@ const AnswersCard = ({ answerKey, onView, onDuplicate, onEdit }: AnswersCardProp
         </div>
 
         <div className="flex gap-2 pt-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => onView?.(answerKey)}
-            className="flex-1 gap-2"
-          >
-            <Eye className="w-4 h-4" />
-            Preview
-          </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => {
+            console.log(answerKey);
+                // Save the answerKey in sessionStorage
+            sessionStorage.setItem('answerKey', JSON.stringify(answerKey));
+            router.push(`/checkmate-instructor/exams/${answerKey.id}`);
+          }}
+          className="flex-1 gap-2"
+        >
+          View Answer Key
+        </Button>
+
           <Button
             variant="outline"
             size="sm"

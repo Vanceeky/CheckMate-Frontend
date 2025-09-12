@@ -1,16 +1,12 @@
 ADD ATTRIBUTION for FLATICONS
 
 
+installed:
+- npm install react-webcam
 
-Users:
-- superadmin
+<script async src="https://docs.opencv.org/4.x/opencv.js"></script>
 
-- institutionHead
 
-- secretary ( for college departments )
+npm install react-beautiful-dnd
 
-- adviser ( for primary/secondary school / SHS)
-
-- intructor ( for colleges )
-
-- students
+installed ngrok

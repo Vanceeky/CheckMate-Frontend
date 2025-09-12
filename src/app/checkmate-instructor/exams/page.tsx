@@ -11,7 +11,7 @@ import CardSummary from '../CardSummary'
 import SummaryBreakdown from '../SummaryBreakdown'
 import AnswersCard from './AnswersCard'
 
-import dummyAnswerKeys from '@/data/answerKeys'
+import { mockAnswerKeys } from '@/data/answerKeys'
 import CreateExam from '@/components/ExamAnswerKeys/CreateExam';
 
 const Exams = () => {
@@ -106,13 +106,13 @@ const Exams = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch mt-4">
 
-                {dummyAnswerKeys.map((key) => (
+                {mockAnswerKeys.map((key) => (
                     <AnswersCard
                     key={key.id}
                     answerKey={key}
-                    onView={(data) => alert(`View: ${data.title}`)}
-                    onDuplicate={(data) => alert(`Duplicate: ${data.title}`)}
-                    onEdit={(data) => alert(`Edit: ${data.title}`)}
+                    onView={(data) => alert(`View: ${data.subject}`)}
+                    onDuplicate={(data) => alert(`Duplicate: ${data.subject}`)}
+                    onEdit={(data) => alert(`Edit: ${data.subject}`)}
                     />
                 ))}
 

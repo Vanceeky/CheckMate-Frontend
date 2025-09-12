@@ -4,6 +4,8 @@ import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import { TopLoader } from "@/components/TopLoader";
 import { Toaster } from "sonner";
+import Script from "next/script";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
       <body className={`${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} font-sans`}>
         <ThemeProvider>
           
@@ -43,4 +46,5 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+} 
+

@@ -144,6 +144,18 @@ const handleSave = () => {
 
   // here you can send it to your API
   // await saveExam(payload)
+
+
+    // ✅ Clear input fields
+    setExamDetails({
+        subject: "",
+        schoolYear: "",
+        semester: "",
+        examType: "Prelim", // reset to default or ""
+    });
+
+    setExamParts([]); // remove all exam sections
+    setStep(1);
 };
 
   return (
@@ -404,7 +416,7 @@ const handleSave = () => {
 
                                                         {part.questions.length === 0 && (
                                                             <div className="text-center py-8 text-muted-foreground">
-                                                            <Hash className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                                                            <Icon className="w-12 h-12 mx-auto mb-3 opacity-50" />
                                                             <p>No questions added yet</p>
                                                             <p className="text-sm">Click "Add Question" to get started</p>
                                                             </div>
@@ -554,7 +566,8 @@ const handleSave = () => {
                 <div className="flex justify-between pt-4">
                 {/* Back / Cancel button */}
                 <Button
-                    variant="outline"
+                    variant="outline" 
+                    className='hover:bg-orange-500 hover:text-white cursor-pointer'
                     onClick={() => (step === 1 ? setOpen(false) : setStep(step - 1))}
                 >
                     {step === 1 ? "Cancel" : "Back"}
@@ -562,6 +575,7 @@ const handleSave = () => {
 
                 {/* Next / Save button */}
                 <Button
+                    className=' text-white cursor-pointer'
                     onClick={() => {
                     if (step < 3) {
                         setStep(step + 1) // go to next step
