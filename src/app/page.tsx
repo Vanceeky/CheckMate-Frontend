@@ -19,7 +19,7 @@ export default function Home() {
         <NavbarComponent  />
 
         <div className="container mx-auto p-8 pt-30 text-left max-w-7xl">
-       <Scanner onPagesUploaded={handlePagesUploaded} />
+    {/*    <Scanner onPagesUploaded={handlePagesUploaded} /> */}
           <Hero/>
        
           <Features/>
