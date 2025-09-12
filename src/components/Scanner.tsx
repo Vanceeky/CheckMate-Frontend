@@ -2,7 +2,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Webcam from "react-webcam";
 import { openDB, IDBPDatabase } from "idb";
-import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
 
 interface Page {
   id: number;
