@@ -37,99 +37,104 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
+import { useUser } from "@/context/UserContext";
 
 
 
-
-// nav-config.ts
 const BASE_PATHS = {
-  superadmin: "/checkmate-super",
-  institutionAdmin: "/checkmate-institution",
-  teacher: "/checkmate-teacher",
-  student: "/checkmate-student",
-  instructor: "/checkmate-instructor",
-} as const
+  SUPERADMIN: "/checkmate-super",
+  INSTITUTION_HEAD: "/checkmate-institution",
+  ADVISER: "/checkmate-teacher",
+  STUDENT: "/checkmate-student",
+  INSTRUCTOR: "/checkmate-instructor",
+  SECRETARY: "/department-secretary",
+} as const;
 
-// Define navs per role
-export const NAV_CONFIG: Record<string, any> = {
-  superadmin: {
+export const NAV_CONFIG: Record<Role, any> = {
+  SUPERADMIN: {
     navMain: [
-      { title: "Dashboard", url: `${BASE_PATHS.superadmin}/`, icon: IconDashboard },
-      { title: "Institutions", url: `${BASE_PATHS.superadmin}/institutions`, icon: IconBuildings },
-      { title: "Analytics", url: `${BASE_PATHS.superadmin}/analytics`, icon: IconChartBar },
-      { title: "Projects", url: `${BASE_PATHS.superadmin}/projects`, icon: IconFolder },
+      { title: "Dashboard", url: `${BASE_PATHS.SUPERADMIN}/`, icon: IconDashboard },
+      { title: "Institutions", url: `${BASE_PATHS.SUPERADMIN}/institutions`, icon: IconBuildings },
+      { title: "Analytics", url: `${BASE_PATHS.SUPERADMIN}/analytics`, icon: IconChartBar },
+      { title: "Projects", url: `${BASE_PATHS.SUPERADMIN}/projects`, icon: IconFolder },
     ],
     navSecondary: [
-      { title: "Settings", url: `${BASE_PATHS.superadmin}/settings`, icon: IconSettings },
+      { title: "Settings", url: `${BASE_PATHS.SUPERADMIN}/settings`, icon: IconSettings },
       { title: "Get Help", url: "#", icon: IconHelp },
     ],
     documents: [
-      { name: "Documents", url: `${BASE_PATHS.superadmin}/documents`, icon: IconFileDescription },
+      { name: "Documents", url: `${BASE_PATHS.SUPERADMIN}/documents`, icon: IconFileDescription },
     ],
   },
 
-  institutionAdmin: {
+  INSTITUTION_HEAD: {
     navMain: [
-      { title: "Dashboard", url: `${BASE_PATHS.institutionAdmin}/`, icon: IconDashboard },
-      { title: "Manage Institution", url: `${BASE_PATHS.institutionAdmin}/manage`, icon: IconBuildings },
-      { title: "Faculty", url: `${BASE_PATHS.institutionAdmin}/faculty`, icon: IconUser },
-      { title: "Students", url: `${BASE_PATHS.institutionAdmin}/students`, icon: IconUsers },
+      { title: "Dashboard", url: `${BASE_PATHS.INSTITUTION_HEAD}/`, icon: IconDashboard },
+      { title: "Manage Institution", url: `${BASE_PATHS.INSTITUTION_HEAD}/manage`, icon: IconBuildings },
+      { title: "Faculty", url: `${BASE_PATHS.INSTITUTION_HEAD}/faculty`, icon: IconUser },
+      { title: "Students", url: `${BASE_PATHS.INSTITUTION_HEAD}/students`, icon: IconUsers },
     ],
     navSecondary: [
-      { title: "Settings", url: `${BASE_PATHS.institutionAdmin}/settings`, icon: IconSettings },
+      { title: "Settings", url: `${BASE_PATHS.INSTITUTION_HEAD}/settings`, icon: IconSettings },
     ],
   },
 
-  instructor: {
+  INSTRUCTOR: {
     navMain: [
-      { title: "Dashboard", url: `${BASE_PATHS.instructor}/`, icon: IconDashboard },
-      { title: "Classes", url: `${BASE_PATHS.instructor}/classes`, icon: IconChalkboard },
-      { title: "Exams", url: `${BASE_PATHS.instructor}/exams`, icon: IconFileDescription },
-      { title: "Grades", url: `${BASE_PATHS.instructor}/grades`, icon: IconChartBar },
+      { title: "Dashboard", url: `${BASE_PATHS.INSTRUCTOR}/`, icon: IconDashboard },
+      { title: "Classes", url: `${BASE_PATHS.INSTRUCTOR}/classes`, icon: IconChalkboard },
+      { title: "Exams", url: `${BASE_PATHS.INSTRUCTOR}/exams`, icon: IconFileDescription },
+      { title: "Grades", url: `${BASE_PATHS.INSTRUCTOR}/grades`, icon: IconChartBar },
     ],
     navSecondary: [
-      { title: "Settings", url: `${BASE_PATHS.instructor}/settings`, icon: IconSettings },
+      { title: "Settings", url: `${BASE_PATHS.INSTRUCTOR}/settings`, icon: IconSettings },
     ],
   },
 
-
-  teacher: {
+  ADVISER: {
     navMain: [
-      { title: "Dashboard", url: `${BASE_PATHS.teacher}/`, icon: IconDashboard },
-      { title: "Classes", url: `${BASE_PATHS.teacher}/classes`, icon: IconChalkboard },
-      { title: "Exams", url: `${BASE_PATHS.teacher}/exams`, icon: IconFileDescription },
-      { title: "Grades", url: `${BASE_PATHS.teacher}/grades`, icon: IconChartBar },
+      { title: "Dashboard", url: `${BASE_PATHS.ADVISER}/`, icon: IconDashboard },
+      { title: "Classes", url: `${BASE_PATHS.ADVISER}/classes`, icon: IconChalkboard },
+      { title: "Exams", url: `${BASE_PATHS.ADVISER}/exams`, icon: IconFileDescription },
+      { title: "Grades", url: `${BASE_PATHS.ADVISER}/grades`, icon: IconChartBar },
     ],
     navSecondary: [
-      { title: "Settings", url: `${BASE_PATHS.teacher}/settings`, icon: IconSettings },
+      { title: "Settings", url: `${BASE_PATHS.ADVISER}/settings`, icon: IconSettings },
     ],
   },
 
-  student: {
+  STUDENT: {
     navMain: [
-      { title: "Dashboard", url: `${BASE_PATHS.student}/`, icon: IconDashboard },
-      { title: "My Exams", url: `${BASE_PATHS.student}/exams`, icon: IconFileDescription },
-      { title: "Results", url: `${BASE_PATHS.student}/results`, icon: IconChartBar },
+      { title: "Dashboard", url: `${BASE_PATHS.STUDENT}/`, icon: IconDashboard },
+      { title: "My Exams", url: `${BASE_PATHS.STUDENT}/exams`, icon: IconFileDescription },
+      { title: "Results", url: `${BASE_PATHS.STUDENT}/results`, icon: IconChartBar },
     ],
     navSecondary: [
-      { title: "Profile", url: `${BASE_PATHS.student}/profile`, icon: IconUser },
-      { title: "Settings", url: `${BASE_PATHS.student}/settings`, icon: IconSettings },
+      { title: "Profile", url: `${BASE_PATHS.STUDENT}/profile`, icon: IconUser },
+      { title: "Settings", url: `${BASE_PATHS.STUDENT}/settings`, icon: IconSettings },
     ],
   },
 
+  SECRETARY: {
+    navMain: [
+      { title: "Dashboard", url: `${BASE_PATHS.SECRETARY}/`, icon: IconDashboard },
+    ],
+    navSecondary: [
+      { title: "Settings", url: `${BASE_PATHS.SECRETARY}/settings`, icon: IconSettings },
+    ],
+  },
+};
 
 
+type Role = "SUPERADMIN" | "INSTITUTION_HEAD" | "ADVISER" | "STUDENT" | "INSTRUCTOR" | "SECRETARY"
 
-}
+export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
+  const { user } = useUser();
+  console.log(user)
 
+  if (!user) return null;
 
-type Role = "superadmin" | "institutionAdmin" | "teacher" | "student" | "instructor"
-
-export function AppSidebar({
-  role = "instructor", // temporary default, later from auth/cookie
-  ...props
-}: { role?: Role } & React.ComponentProps<typeof Sidebar>) {
-  const nav = NAV_CONFIG[role] // pick correct navs
+  const nav = NAV_CONFIG[user.role as Role];
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -156,8 +161,14 @@ export function AppSidebar({
       </SidebarContent>
 
       <SidebarFooter>
-        <NavUser user={{ name: "shadcn", email: "m@example.com", avatar: "/avatars/shadcn.jpg" }} />
+        <NavUser
+          user={{
+            name: user.name || user.username,
+            email: user.email,
+            avatar: user.avatar,
+          }}
+        />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

@@ -1,32 +1,8 @@
-
-"use client";
 import { GalleryVerticalEnd } from "lucide-react"
 
-import { useUser } from "@/context/UserContext";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { LoginForm } from "@/components/login-form";
+import { LoginForm } from "@/components/login-form"
+
 export default function LoginPage() {
-     const { user } = useUser();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (user) {
-      const BASE_PATHS = {
-        SUPERADMIN: "/checkmate-super",
-        INSTITUTION_HEAD: "/checkmate-institution",
-        ADVISER: "/checkmate-teacher",
-        STUDENT: "/checkmate-student",
-        INSTRUCTOR: "/checkmate-instructor",
-        SECRETARY: "/department-secretary",
-      } as const;
-
-      router.replace(BASE_PATHS[user.role as keyof typeof BASE_PATHS] || "/");
-    }
-  }, [user, router]);
-
-  if (user) return null; // don’t render login if logged in
-
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">

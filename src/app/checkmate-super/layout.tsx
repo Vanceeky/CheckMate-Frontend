@@ -1,42 +1,38 @@
 import React from "react";
-import { AppSidebar } from "@/components/app-sidebar"
-import { ChartAreaInteractive } from "@/components/chart-area-interactive"
-
-import { SectionCards } from "@/components/section-cards"
-import { SiteHeader } from "@/components/site-header"
+import { AppSidebar } from "@/components/app-sidebar";
+import { SiteHeader } from "@/components/site-header";
 import {
   SidebarInset,
   SidebarProvider,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
-
+import ProtectedRoute from "@/context/ProtectedRoute";
 
 const CheckmateSuperLayout = ({ children }: { children: React.ReactNode }) => {
-    return <>
-        <SidebarProvider
-      style={
-        {
-          "--sidebar-width": "calc(var(--spacing) * 72)",
-          "--header-height": "calc(var(--spacing) * 12)",
-        } as React.CSSProperties
-      }
-    >
-      <AppSidebar variant="inset" />
+  return (
+    <ProtectedRoute allowedRoles={["SUPERADMIN"]}>
+      <SidebarProvider
+        style={
+          {
+            "--sidebar-width": "calc(var(--spacing) * 72)",
+            "--header-height": "calc(var(--spacing) * 12)",
+          } as React.CSSProperties
+        }
+      >
+        <AppSidebar variant="inset" />
 
-      <SidebarInset>
-        <SiteHeader />
-        
-        <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2">
-            {children}
+        <SidebarInset>
+          <SiteHeader />
+
+          <div className="flex flex-1 flex-col">
+            <div className="@container/main flex flex-1 flex-col gap-2">
+              {children}
+            </div>
           </div>
-        </div>
-
-      </SidebarInset>
-    </SidebarProvider>
-
-    
-    </>;
+        </SidebarInset>
+      </SidebarProvider>
+    </ProtectedRoute>
+  );
 };
 
 export default CheckmateSuperLayout;

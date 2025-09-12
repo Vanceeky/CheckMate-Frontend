@@ -27,6 +27,8 @@ export const metadata: Metadata = {
   description: "Smart Exam Evaluation System",
 };
 
+import { UserProvider } from "@/context/UserContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -38,7 +40,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} font-sans`}>
         <ThemeProvider>
           
-          {children}
+        <UserProvider>{children}</UserProvider>
           
             <Toaster position="top-center" />
 

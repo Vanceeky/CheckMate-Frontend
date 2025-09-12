@@ -8,19 +8,21 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
-
+import ProtectedRoute from "@/context/ProtectedRoute";
 
 
 const CheckmateSuperLayout = ({ children }: { children: React.ReactNode }) => {
-    return <>
+    return (
+
+      <ProtectedRoute allowedRoles={["INSTRUCTOR"]}>
         <SidebarProvider
-      style={
-        {
-          "--sidebar-width": "calc(var(--spacing) * 72)",
-          "--header-height": "calc(var(--spacing) * 12)",
-        } as React.CSSProperties
-      }
-    >
+          style={
+            {
+              "--sidebar-width": "calc(var(--spacing) * 72)",
+              "--header-height": "calc(var(--spacing) * 12)",
+            } as React.CSSProperties
+          }
+        >
       <AppSidebar variant="inset" />
 
       <SidebarInset>
@@ -33,10 +35,11 @@ const CheckmateSuperLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
 
       </SidebarInset>
-    </SidebarProvider>
+        </SidebarProvider>
 
+      </ProtectedRoute>
     
-    </>;
+    );
 };
 
 export default CheckmateSuperLayout;
